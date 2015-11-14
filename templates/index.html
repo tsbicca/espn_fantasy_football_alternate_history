@@ -1,0 +1,21 @@
+{%- extends "bootstrap/base.html" %}
+
+{% block title %}My Title{% endblock %}
+
+{% block body %}
+{% block content %}
+<br>
+<div class="jumbotron vertical-center">
+  <div class="container">
+    <form action="/" method="post">
+      <div class="form-group">
+        <label for="leagueURL">League URL</label>
+        <input name="leagueURL" type="text" class="form-control" id="leagueURL" placeholder="League URL">
+      </div>
+      <p class="help-block">Enter any URL from your ESPN league website</p>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% endblock %}

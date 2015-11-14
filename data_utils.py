@@ -1,6 +1,7 @@
 from config import *
 from datetime import datetime
 from scoreboard_data_parser import *
+import re
 
 def prompt_for_team(owners):
   print("Owners: ")
@@ -18,7 +19,7 @@ def current_week():
   days = (current_time - opening_day_date).days
   return (days // 7) + 1 # aka weeks, add 1 to account for opening week
 
-def construct_season_data(url, alt_team, owners, league):
+def construct_season_data(alt_team, owners, league):
   '''
   Function scrapes each score page.  Return two datasets:
   seasons_schedule is a dictionary where key is the owner and value is a list that is the owners schedule. Schedule is
@@ -72,5 +73,13 @@ def display_alt_history(season_schedule, season_scores, owners, alt_team):
           losses = losses + 1
         print("  Week {0} vs {1}: {2} ({3} - {4})".format(week + 1, opponent, outcome, alt_team_score, opponent_score))
       print("Alternate History Record: {0}-{1}".format(wins, losses))
+
+def leagueID_from_url(url):
+  search_string = 'leagueId\=(.*)\&'
+  result = re.search(search_string, url)
+  if result:
+    return result.group(1)
+  else:
+    raise Exception("Unable To Find League ID")
 
 

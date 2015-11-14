@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from config import scoreboard_url
 
 def fetch_page_as_soup(url):
   page = requests.get(url)
@@ -32,8 +33,8 @@ def get_owners(soup):
     owners.append(owner.next)
   return owners
 
-def get_owners_from_url(url, league):
-  owners_url = url.format(LEAGUE=str(league), WEEK="1")
+def get_owners_from_url(league):
+  owners_url = scoreboard_url.format(LEAGUE=str(league), WEEK="1")
   owners_soup = fetch_page_as_soup(owners_url)
   return get_owners(owners_soup)
 

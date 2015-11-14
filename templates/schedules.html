@@ -1,0 +1,46 @@
+{%- extends "bootstrap/base.html" %}
+
+{% block title %}My Title{% endblock %}
+
+{% block body %}
+{% block content %}
+<br>
+ <div class="container">
+
+     {% for owner in owners if owner != alt_owner %}
+     <div class="col-md-6">
+         <H4>If {{alt_owner}} had {{owner}}'s schedule</H4>
+         <div class="row">
+            <table class="table table-striped">
+                <thead>
+                   <th>Result</th>
+                    <th>Team</th>
+                    <th>Score</th>
+                    <th>Team</th>
+                    <th>Score</th>
+
+                </thead>
+                <tbody>
+                {% for week in season_scores %}
+                {% if week[season_schedule[owner][loop.index - 1]] >  week[alt_owner] %}
+                <tr class="danger">
+                    <td><h4>Loss</h4></td>
+                {% else %}
+                <tr class="success">
+                    <td><h4>Win</h4></td>
+                {%- endif %}
+                    <td><h4>{{ alt_owner }}</h4></td>
+                    <td><h4>{{ week[alt_owner] }}</h4></td>
+                    <td><h4>{{ season_schedule[owner][loop.index - 1] }}</h4></td>
+                    <td><h4>{{ week[season_schedule[owner][loop.index - 1]] }}</h4></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+         </div>
+         <br>
+    </div>
+     {% endfor %}
+ </div>
+{% endblock %}
+{% endblock %}

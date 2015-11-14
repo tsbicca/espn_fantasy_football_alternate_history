@@ -1,0 +1,25 @@
+{%- extends "bootstrap/base.html" %}
+
+{% block title %}My Title{% endblock %}
+
+{% block body %}
+{% block content %}
+<br>
+ <div class="container">
+     <div class="col-md-5 col-centered">
+         <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <th>Owners</th>
+                </thead>
+                <tbody>
+                {% for owner in owners %}
+                <tr><td><a href="{{ url_for('alternate_schedules', leagueid=league, ownerid=loop.index) }}">{{ owner }}</a></td><tr>
+                {% endfor %}
+                </tbody>
+            </table>
+         </div>
+    </div>
+ </div>
+{% endblock %}
+{% endblock %}
