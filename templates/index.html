@@ -1,9 +1,10 @@
 {%- extends "bootstrap/base.html" %}
 
-{% block title %}My Title{% endblock %}
+{% block title %}Toilet Bowl Champ Dot Com{% endblock %}
 
 {% block body %}
 {% block content %}
+<center><img src={{ url_for('static', filename='logo.jpg') }}></center>
 <br>
 <div class="jumbotron vertical-center">
   <div class="container">
@@ -16,6 +17,10 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
+</div>
+<div class="footer navbar-fixed-bottom">
+<center><small>A <a href="https://www.twitter.com/tsbicca">@tsbicca</a> joint<br>
+Bugs? Feature Requests? This is an open source site.  <a href="https://github.com/tsbicca/espn_fantasy_football_alternate_history">Contribute on github.</a></small></center>
 </div>
 {% endblock %}
 {% endblock %}

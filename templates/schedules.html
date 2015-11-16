@@ -1,46 +1,62 @@
 {%- extends "bootstrap/base.html" %}
 
-{% block title %}My Title{% endblock %}
+{% block title %}Toilet Bowl Champ: Schedules Results{% endblock %}
 
 {% block body %}
 {% block content %}
+<center><img src={{ url_for('static', filename='logo.jpg') }}></center>
+
 <br>
  <div class="container">
-
+     <div class="text-center col-md-12">
+        <H3 class="text-primary">If {{alt_owner}} had...</H3>
+     </div>
+     <div class="row">
      {% for owner in owners if owner != alt_owner %}
-     <div class="col-md-6">
-         <H4>If {{alt_owner}} had {{owner}}'s schedule</H4>
-         <div class="row">
-            <table class="table table-striped">
+     {% set wins = [] %}
+     {% set losses = [] %}
+            <div class="text-center col-md-6">
+            <H4>{{owner}}'s schedule</H4>
+            <table class="table table-condensed">
                 <thead>
-                   <th>Result</th>
-                    <th>Team</th>
-                    <th>Score</th>
-                    <th>Team</th>
-                    <th>Score</th>
+                   <th class="text-center bg-info">Result</th>
+                   <th class="text-center bg-info">Team</th>
+                   <th class="text-center bg-info">Score</th>
+                   <th class="text-center bg-info">Team</th>
+                   <th class="text-center bg-info">Score</th>
 
                 </thead>
                 <tbody>
                 {% for week in season_scores %}
                 {% if week[season_schedule[owner][loop.index - 1]] >  week[alt_owner] %}
+                {% if losses.append(1) %}{%- endif %}
                 <tr class="danger">
-                    <td><h4>Loss</h4></td>
+                    <td>Loss</td>
                 {% else %}
+                {% if wins.append(1) %}{%- endif %}
                 <tr class="success">
-                    <td><h4>Win</h4></td>
+                    <td>Win</td>
                 {%- endif %}
-                    <td><h4>{{ alt_owner }}</h4></td>
-                    <td><h4>{{ week[alt_owner] }}</h4></td>
-                    <td><h4>{{ season_schedule[owner][loop.index - 1] }}</h4></td>
-                    <td><h4>{{ week[season_schedule[owner][loop.index - 1]] }}</h4></td>
+                    <td>{{ alt_owner }}</td>
+                    <td>{{ week[alt_owner] }}</td>
+                    <td>{{ season_schedule[owner][loop.index - 1] }}</td>
+                    <td>{{ week[season_schedule[owner][loop.index - 1]] }}</td>
                 </tr>
                 {% endfor %}
+                <td class="bg-info"><strong>Total</strong></td>
+                <td class="bg-info"><strong>Wins</strong></td>
+                <td class="bg-info"><strong>{{wins|length}}</strong></td>
+                <td class="bg-info"><strong>Losses</strong></td>
+                <td class="bg-info"><strong>{{losses|length}}</strong></td>
                 </tbody>
             </table>
          </div>
-         <br>
-    </div>
      {% endfor %}
+     </div>
  </div>
+<div class="footer navbar-fixed-bottom">
+<center><small>A <a href="https://www.twitter.com/tsbicca">@tsbicca</a> joint<br>
+Bugs? Feature Requests? This is an open source site.  <a href="https://github.com/tsbicca/espn_fantasy_football_alternate_history">Contribute on github.</a></small></center>
+</div>
 {% endblock %}
 {% endblock %}

@@ -1,25 +1,29 @@
 {%- extends "bootstrap/base.html" %}
 
-{% block title %}My Title{% endblock %}
+{% block title %}Toilet Bowl Champ: Teams{% endblock %}
 
 {% block body %}
 {% block content %}
+<center><img src={{ url_for('static', filename='logo.jpg') }}></center>
+
 <br>
  <div class="container">
-     <div class="col-md-5 col-centered">
+     <div class="col-md-3 text-center">
+     </div>
+     <div class="col-md-6 text-center ">
          <div class="row">
-            <table class="table table-striped">
-                <thead>
-                    <th>Owners</th>
-                </thead>
-                <tbody>
+                     <h4 class="text-center">Select an owner to compare against the league</h4>
                 {% for owner in owners %}
-                <tr><td><a href="{{ url_for('alternate_schedules', leagueid=league, ownerid=loop.index) }}">{{ owner }}</a></td><tr>
+                <a class="text-center" href="{{ url_for('alternate_schedules', leagueid=league, ownerid=loop.index) }}">{{ owner }}</a><br>
                 {% endfor %}
-                </tbody>
-            </table>
          </div>
     </div>
+    <div class="col-md-3 col-centered">
+    </div>
  </div>
+<div class="footer navbar-fixed-bottom">
+<center><small>A <a href="https://www.twitter.com/tsbicca">@tsbicca</a> joint<br>
+Bugs? Feature Requests? This is an open source site.  <a href="https://github.com/tsbicca/espn_fantasy_football_alternate_history">Contribute on github.</a></small></center>
+</div>
 {% endblock %}
 {% endblock %}

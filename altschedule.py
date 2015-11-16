@@ -19,7 +19,6 @@ def league_url_submission():
   except:
     '''todo: handle case when URL is bad'''
 
-
 @app.route('/league/<int:leagueid>', methods=['GET'])
 def choose_owner(leagueid):
   owners = get_owners_from_url(leagueID)
@@ -28,17 +27,9 @@ def choose_owner(leagueid):
 @app.route('/league/<int:leagueid>/<int:ownerid>', methods=['GET'])
 def alternate_schedules(leagueid, ownerid):
   owners = get_owners_from_url(leagueID)
-  alt_owner = owners[ownerid]
+  alt_owner = owners[ownerid-1] #loop.counter starts counting at 1, need to reduce by 1 to match owners index
   season_schedule, season_scores = construct_season_data(alt_owner, owners, leagueID)
   return render_template("schedules.html", season_schedule=season_schedule, season_scores=season_scores, owners=owners, alt_owner=alt_owner)
-
-
-'''
-owners = get_owners_from_url(scoreboard_url, leagueID)
-alt_team = "taylor sbicca"
-season_schedule, season_scores = construct_season_data(scoreboard_url, alt_team, owners, leagueID)
-display_alt_history(season_schedule, season_scores, owners, alt_team)
-'''
 
 if __name__ == '__main__':
   app.debug = True

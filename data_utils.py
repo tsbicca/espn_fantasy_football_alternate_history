@@ -75,11 +75,9 @@ def display_alt_history(season_schedule, season_scores, owners, alt_team):
       print("Alternate History Record: {0}-{1}".format(wins, losses))
 
 def leagueID_from_url(url):
-  search_string = 'leagueId\=(.*)\&'
+  search_string = 'leagueId\=(.*?)\&'
   result = re.search(search_string, url)
   if result:
     return result.group(1)
   else:
     raise Exception("Unable To Find League ID")
-
-
