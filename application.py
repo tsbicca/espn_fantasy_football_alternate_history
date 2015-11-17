@@ -21,14 +21,14 @@ def league_url_submission():
 
 @app.route('/league/<int:leagueid>', methods=['GET'])
 def choose_owner(leagueid):
-  owners = get_owners_from_url(leagueID)
-  return render_template("owners.html", owners=owners, league=leagueID)
+  owners = get_owners_from_url(leagueid)
+  return render_template("owners.html", owners=owners, league=leagueid)
 
 @app.route('/league/<int:leagueid>/<int:ownerid>', methods=['GET'])
 def alternate_schedules(leagueid, ownerid):
-  owners = get_owners_from_url(leagueID)
+  owners = get_owners_from_url(leagueid)
   alt_owner = owners[ownerid-1] #loop.counter starts counting at 1, need to reduce by 1 to match owners index
-  season_schedule, season_scores = construct_season_data(alt_owner, owners, leagueID)
+  season_schedule, season_scores = construct_season_data(alt_owner, owners, leagueid)
   return render_template("schedules.html", season_schedule=season_schedule, season_scores=season_scores, owners=owners, alt_owner=alt_owner)
 
 if __name__ == '__main__':
