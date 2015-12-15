@@ -33,7 +33,7 @@ def construct_season_data(alt_team, owners, league):
   for owner in owners:
     season_schedule[owner] = []
 
-  for week in range(1, current_week() + 1):
+  for week in range(1, min(current_week() + 1, last_week(league) + 1)): #+1 because range isn't inclusive
     url = scoreboard_url.format(LEAGUE=str(league), WEEK=str(week))
     soup = fetch_page_as_soup(url)
     matchups = get_matchups_for_week(soup)
@@ -73,6 +73,14 @@ def display_alt_history(season_schedule, season_scores, owners, alt_team):
           losses = losses + 1
         print("  Week {0} vs {1}: {2} ({3} - {4})".format(week + 1, opponent, outcome, alt_team_score, opponent_score))
       print("Alternate History Record: {0}-{1}".format(wins, losses))
+
+def last_week(leagueID):
+  formatted_league_settings_url = league_settings_url.format(LEAGUEID=str(leagueID))
+  soup = fetch_page_as_soup(formatted_league_settings_url)
+  matchup_period = soup.find('td', text = "Regular Season Matchups" ).find_parent('tr')
+  matchup_period_text = matchup_period.find('div', {'class':'viewable'}).contents
+  return int(matchup_period_text[0].split(" ")[0])
+
 
 def leagueID_from_url(url):
   search_string = 'leagueId\=(.*?)(&|$)'
