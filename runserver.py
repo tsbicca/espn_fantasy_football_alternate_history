@@ -3,7 +3,7 @@ This script runs the ToiletBowlChamp application using a development server.
 """
 
 from os import environ
-from ToiletBowlChamp import app
+from toiletbowlchamp import app
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', 'localhost')
