@@ -1,2 +1,0 @@
-C:\Users\taylor\source\repos\espn_fantasy_football_alternate_history\obj\x86\Debug\github_tbc.vbprojResolveAssemblyReference.cache
-C:\Users\taylor\source\repos\espn_fantasy_football_alternate_history\obj\x86\Debug\github_tbc.vbproj.CoreCompileInputs.cache
