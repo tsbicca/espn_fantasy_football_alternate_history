@@ -2,8 +2,6 @@
 # you cannot run it directly
 
 deactivate () {
-    unset pydoc
-
     # reset old environment variables
     if [ -n "$_OLD_VIRTUAL_PATH" ] ; then
         PATH="$_OLD_VIRTUAL_PATH"
@@ -20,7 +18,7 @@ deactivate () {
     # be called to get it to forget past commands.  Without forgetting
     # past commands the $PATH changes we made may not be respected
     if [ -n "$BASH" -o -n "$ZSH_VERSION" ] ; then
-        hash -r 2>/dev/null
+        hash -r
     fi
 
     if [ -n "$_OLD_VIRTUAL_PS1" ] ; then
@@ -39,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'C:\sunitha\projects\FlaskWebProject1\FlaskWebProject1\env'; else echo '/C/sunitha/projects/FlaskWebProject1/FlaskWebProject1/env'; fi;)"
+VIRTUAL_ENV="C:\Users\taylor\source\repos\ToiletBowlChamp\ToiletBowlChamp\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -56,8 +54,8 @@ fi
 
 if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
     _OLD_VIRTUAL_PS1="$PS1"
-    if [ "x" != x ] ; then
-        PS1="$PS1"
+    if [ "x(env) " != x ] ; then
+	PS1="(env) $PS1"
     else
     if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
         # special case for Aspen magic directories
@@ -70,11 +68,9 @@ if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
     export PS1
 fi
 
-alias pydoc="python -m pydoc"
-
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
 # past commands the $PATH changes we made may not be respected
 if [ -n "$BASH" -o -n "$ZSH_VERSION" ] ; then
-    hash -r 2>/dev/null
+    hash -r
 fi

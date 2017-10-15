@@ -50,7 +50,8 @@ PKG_INFO_ENCODING = 'utf-8'
 # to 1.2 once PEP 345 is supported everywhere
 PKG_INFO_PREFERRED_VERSION = '1.1'
 
-_LINE_PREFIX = re.compile('\n       \|')
+_LINE_PREFIX_1_2 = re.compile('\n       \|')
+_LINE_PREFIX_PRE_1_2 = re.compile('\n        ')
 _241_FIELDS = ('Metadata-Version', 'Name', 'Version', 'Platform',
                'Summary', 'Description',
                'Keywords', 'Home-page', 'Author', 'Author-email',
@@ -295,7 +296,10 @@ class LegacyMetadata(object):
         return 'UNKNOWN'
 
     def _remove_line_prefix(self, value):
-        return _LINE_PREFIX.sub('\n', value)
+        if self.metadata_version in ('1.0', '1.1'):
+            return _LINE_PREFIX_PRE_1_2.sub('\n', value)
+        else:
+            return _LINE_PREFIX_1_2.sub('\n', value)
 
     def __getattr__(self, name):
         if name in _ATTR2FIELD:
@@ -374,7 +378,10 @@ class LegacyMetadata(object):
                 continue
             if field not in _LISTFIELDS:
                 if field == 'Description':
-                    values = values.replace('\n', '\n       |')
+                    if self.metadata_version in ('1.0', '1.1'):
+                        values = values.replace('\n', '\n        ')
+                    else:
+                        values = values.replace('\n', '\n       |')
                 values = [values]
 
             if field in _LISTTUPLEFIELDS:
@@ -437,16 +444,16 @@ class LegacyMetadata(object):
                     # check that the values are valid
                     if not scheme.is_valid_matcher(v.split(';')[0]):
                         logger.warning(
-                            '%r: %r is not valid (field %r)',
+                            "'%s': '%s' is not valid (field '%s')",
                             project_name, v, name)
             # FIXME this rejects UNKNOWN, is that right?
             elif name in _VERSIONS_FIELDS and value is not None:
                 if not scheme.is_valid_constraint_list(value):
-                    logger.warning('%r: %r is not a valid version (field %r)',
+                    logger.warning("'%s': '%s' is not a valid version (field '%s')",
                                    project_name, value, name)
             elif name in _VERSION_FIELDS and value is not None:
                 if not scheme.is_valid_version(value):
-                    logger.warning('%r: %r is not a valid version (field %r)',
+                    logger.warning("'%s': '%s' is not a valid version (field '%s')",
                                    project_name, value, name)
 
         if name in _UNICODEFIELDS:
@@ -524,7 +531,7 @@ class LegacyMetadata(object):
             for field in fields:
                 value = self.get(field, None)
                 if value is not None and not controller(value):
-                    warnings.append('Wrong value for %r: %s' % (field, value))
+                    warnings.append("Wrong value for '%s': %s" % (field, value))
 
         return missing, warnings
 
@@ -548,7 +555,7 @@ class LegacyMetadata(object):
             ('description', 'Description'),
             ('keywords', 'Keywords'),
             ('platform', 'Platform'),
-            ('classifier', 'Classifier'),
+            ('classifiers', 'Classifier'),
             ('download_url', 'Download-URL'),
         )
 
@@ -617,6 +624,7 @@ class LegacyMetadata(object):
 
 
 METADATA_FILENAME = 'pydist.json'
+WHEEL_METADATA_FILENAME = 'metadata.json'
 
 
 class Metadata(object):
@@ -758,6 +766,8 @@ class Metadata(object):
                                 result = d.get(key, value)
                         else:
                             d = d.get('python.exports')
+                            if not d:
+                                d = self._data.get('python.exports')
                             if d:
                                 result = d.get(key, value)
                     if result is sentinel:
@@ -776,8 +786,8 @@ class Metadata(object):
             if (scheme or self.scheme) not in exclusions:
                 m = pattern.match(value)
                 if not m:
-                    raise MetadataInvalidError('%r is an invalid value for '
-                                               'the %r property' % (value,
+                    raise MetadataInvalidError("'%s' is an invalid value for "
+                                               "the '%s' property" % (value,
                                                                     key))
 
     def __setattr__(self, key, value):

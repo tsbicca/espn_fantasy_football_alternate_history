@@ -1,47 +1,33 @@
-{%- extends "bootstrap/base.html" %}
+{% extends "layout.html" %}
 
-{% block title %}Toilet Bowl Champ Dot Com{% endblock %}
-
-{% block body %}
 {% block content %}
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MMR4TT"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MMR4TT');</script>
-<!-- End Google Tag Manager -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-70240524-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-<center><img src={{ url_for('static', filename='logo.jpg') }}></center>
-<br>
-<div class="jumbotron vertical-center">
-  <div class="container">
-    <form action="/" method="post">
-      <div class="form-group">
-        <label for="leagueURL">League URL</label>
-        <input name="leagueURL" type="text" class="form-control" id="leagueURL" placeholder="League URL">
-      </div>
-      <p class="help-block">Enter any URL from your ESPN league website
-      <br><small>Example: http://games.espn.go.com/ffl/clubhouse?leagueId=192618</small></p>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
+<div class="jumbotron">
+    <h1>Flask</h1>
+    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
 
-<div class="footer fixed-bottom">
-<center><small>A <a href="https://www.twitter.com/tsbicca">@tsbicca</a> joint<br>
-Bugs? Feature Requests? This is an open source site.  <a href="https://github.com/tsbicca/espn_fantasy_football_alternate_history">Contribute on github.</a></small></center>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            Flask gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="http://flask.pocoo.org/docs/">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>The Python Package Index is a repository of software for the Python programming language.</p>
+        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Microsoft Azure</h2>
+        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
+        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
+    </div>
 </div>
-{% endblock %}
+
 {% endblock %}

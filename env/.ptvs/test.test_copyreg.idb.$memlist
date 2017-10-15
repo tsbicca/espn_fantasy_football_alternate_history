@@ -1,0 +1,10 @@
+ExtensionSaver
+C
+CopyRegTestCase
+WithWeakref
+WithoutSlots
+copyreg
+WithPrivate
+WithSingleString
+WithInherited
+unittest
