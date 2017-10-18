@@ -5,7 +5,7 @@ Routes and views for the flask application.
 from data_utils import *
 from config import *
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
-from ToiletBowlChamp import app
+from toiletbowlchamp import app
 
 @app.route('/')
 def index():
