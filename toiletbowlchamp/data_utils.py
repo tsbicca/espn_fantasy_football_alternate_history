@@ -1,6 +1,6 @@
-from config import *
+from toiletbowlchamp.config import *
 from datetime import datetime
-from scoreboard_data_parser import *
+from toiletbowlchamp.scoreboard_data_parser import *
 import re
 
 def prompt_for_team(owners):

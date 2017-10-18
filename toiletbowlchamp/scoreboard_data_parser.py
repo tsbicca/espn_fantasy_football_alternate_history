@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from config import scoreboard_url
+from toiletbowlchamp.config import scoreboard_url
 
 def fetch_page_as_soup(url):
   page = requests.get(url)
