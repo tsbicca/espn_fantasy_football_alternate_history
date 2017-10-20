@@ -26,7 +26,7 @@ if sys.version_info[0] == 3:
         #with open(path, 'r') as f:
         #    code = f.read()
         #code = code.replace('\r\n', '\n') + '\n'
-        exec(code, global_dict)
+        exec(path, global_dict)
 else:
     def to_str(value):
         return value.encode(sys.getfilesystemencoding())
