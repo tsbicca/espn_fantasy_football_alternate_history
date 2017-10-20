@@ -31,6 +31,10 @@ def alternate_schedules(leagueid, ownerid):
   season_schedule, season_scores = construct_season_data(alt_owner, owners, leagueid)
   return render_template("schedules.html", season_schedule=season_schedule, season_scores=season_scores, owners=owners, alt_owner=alt_owner)
 
+@app.errorhandler(500)
+def internal_error(error):
+    return "500 flask error"
+
 if __name__ == '__main__':
   app.debug = True
   app.run()
